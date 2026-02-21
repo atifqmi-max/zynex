@@ -1,0 +1,13 @@
+name: teen_wallet_moja
+description: Moja-style app with wallet send/receive
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^2.21.0
+  firebase_auth: ^4.8.0
+  cloud_firestore: ^4.9.0
+  provider: ^6.1.5
