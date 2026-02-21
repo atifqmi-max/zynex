@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zynex - Advanced AI Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        .btn-login:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 100px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Credit Display */
+        .credit-display {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1rem 2rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .credit-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 10px;
+            color: #ffd700;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card.premium {
+            border: 2px solid gold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card.premium::before {
+            content: "PREMIUM";
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: gold;
+            color: #333;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .price {
+            font-size: 3rem;
+            color: #667eea;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .premium-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .premium-features li {
+            padding: 0.5rem 0;
+            color: #666;
+        }
+
+        .premium-features li::before {
+            content: "✓";
+            color: #667eea;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.05);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            display: none;
+        }
+
+        .admin-panel.visible {
+            display: block;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-header h3 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .admin-toggle {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .admin-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .admin-card h4 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .admin-card label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+            color: #666;
+        }
+
+        .admin-card input, .admin-card select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .admin-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .admin-btn:hover {
+            background: #764ba2;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        /* Credit System Display */
+        .daily-credit-info {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .credit-progress {
+            width: 100%;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+
+        .credit-progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #667eea;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://image2url.com/r2/default/images/1771634864927-4b0fb189-37b0-4e5e-8f6a-bc1b75984a67.png" alt="Zynex Logo">
+                <h1>Zynex</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="showSection('features')">Features</a>
+                <a href="#" onclick="showSection('pricing')">Pricing</a>
+                <a href="#" onclick="showSection('admin')">Admin</a>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-login" onclick="showModal('login')">Login</button>
+                <button class="btn btn-register" onclick="showModal('register')">Register</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div id="home" class="hero">
+            <h2>Welcome to Zynex AI</h2>
+            <p>Advanced AI platform for image and video generation. Create stunning content with cutting-edge technology.</p>
+            
+            <div class="credit-display" id="creditDisplay">
+                Available Credits: <span class="credit-amount" id="creditAmount">100</span>
+            </div>
+            
+            <div class="daily-credit-info">
+                <h4>Daily Credits</h4>
+                <div class="credit-progress">
+                    <div class="credit-progress-bar" id="creditProgress" style="width: 50%"></div>
+                </div>
+                <p id="dailyCreditText">Used: 50 / 100</p>
+                <p>Next reset: 24h</p>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div id="features" class="features-grid">
+            <div class="feature-card" onclick="generateImage()">
+                <div class="feature-icon">🎨</div>
+                <h3>AI Image Generation</h3>
+                <p>Create stunning images from text descriptions using advanced AI.</p>
+                <small>Cost: 5 credits</small>
+            </div>
+            
+            <div class="feature-card premium" onclick="generateVideo()">
+                <div class="feature-icon">🎥</div>
+                <h3>AI Video Generation</h3>
+                <p>Generate amazing videos from text prompts. Premium feature.</p>
+                <small>Premium Only</small>
+            </div>
+            
+            <div class="feature-card" onclick="showCreditSystem()">
+                <div class="feature-icon">⚡</div>
+                <h3>Credit System</h3>
+                <p>Earn daily credits and manage your usage efficiently.</p>
+                <small>Daily: 100 credits</small>
+            </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div id="pricing" class="pricing-section">
+            <div class="pricing-card">
+                <h3>Premium Plan</h3>
+                <div class="price" id="premiumPrice">$19.99<span>/month</span></div>
+                <ul class="premium-features" id="premiumFeatures">
+                    <li>Unlimited Image Generation</li>
+                    <li>AI Video Generation</li>
+                    <li>Priority Processing</li>
+                    <li>Advanced Features</li>
+                </ul>
+                <button class="btn-premium" onclick="upgradeToPremium()">Upgrade to Premium</button>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin" class="admin-panel">
+            <div class="admin-header">
+                <h3>Admin Dashboard</h3>
+                <button class="admin-toggle" onclick="toggleAdmin()">Close Admin</button>
+            </div>
+            
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h4>Credit Management</h4>
+                    <label>Daily Credit Limit</label>
+                    <input type="number" id="dailyCreditLimit" value="100">
+                    <button class="admin-btn" onclick="updateDailyCreditLimit()">Update Limit</button>
+                    
+                    <label>Give Credits to User</label>
+                    <select id="userSelect">
+                        <option>Select User</option>
+                        <option>user1@example.com</option>
+                        <option>user2@example.com</option>
+                    </select>
+                    <input type="number" id="creditAmount" placeholder="Amount">
+                    <button class="admin-btn" onclick="giveCredits()">Give Credits</button>
+                </div>
+                
+                <div class="admin-card">
+                    <h4>Premium Plan Management</h4>
+                    <label>Premium Price ($)</label>
+                    <input type="number" id="premiumPriceInput" value="19.99">
+                    <button class="admin-btn" onclick="updatePremiumPrice()">Update Price</button>
+                    
+                    <label>Add New Feature</label>
+                    <input type="text" id="newFeature" placeholder="Feature name">
+                    <button class="admin-btn" onclick="addFeature()">Add Feature</button>
+                    
+                    <label>Remove Feature</label>
+                    <select id="removeFeatureSelect">
+                        <option>Select feature to remove</option>
+                    </select>
+                    <button class="admin-btn" onclick="removeFeature()">Remove Feature</button>
+                </div>
+                
+                <div class="admin-card">
+                    <h4>System Settings</h4>
+                    <label>API Key Status</label>
+                    <p style="color: green;">✓ Active (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)</p>
+                    
+                    <label>User Management</label>
+                    <button class="admin-btn" onclick="viewUsers()">View All Users</button>
+                    <button class="admin-btn" onclick="resetDailyCredits()">Reset All Daily Credits</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('login')">&times;</span>
+            <h3>Login to Zynex</h3>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button class="modal-btn" onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('register')">&times;</span>
+            <h3>Register for Zynex</h3>
+            <input type="text" id="registerName" placeholder="Full Name">
+            <input type="email" id="registerEmail" placeholder="Email">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <button class="modal-btn" onclick="register()">Register</button>
+        </div>
+    </div>
+
+    <!-- Loading Animation -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p style="color: white; margin-top: 1rem;">Processing...</p>
+    </div>
+
+    <script>
+        // State management
+        let isLoggedIn = false;
+        let currentUser = null;
+        let credits = 100;
+        let dailyCreditsUsed = 50;
+        let dailyCreditLimit = 100;
+        let premiumPrice = 19.99;
+        let premiumFeatures = [
+            "Unlimited Image Generation",
+            "AI Video Generation",
+            "Priority Processing",
+            "Advanced Features"
+        ];
+        let isAdmin = true; // Set to true for demo
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCreditDisplay();
+            updatePremiumFeaturesList();
+            populateRemoveFeatureSelect();
+        });
+
+        // Navigation
+        function showSection(section) {
+            document.querySelectorAll('[id]').forEach(el => {
+                if (el.id === section) {
+                    el.style.display = section === 'home' ? 'block' : 
+                                 section === 'features' ? 'grid' : 
+                                 section === 'pricing' ? 'block' : 'block';
+                } else if (el.id === 'features' && section !== 'features') {
+                    el.style.display = 'grid';
+                } else if (el.id === 'home' && section !== 'home') {
+                    el.style.display = 'block';
+                } else if (el.id === 'pricing' && section !== 'pricing') {
+                    el.style.display = 'block';
+                } else if (el.
